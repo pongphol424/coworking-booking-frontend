@@ -26,7 +26,7 @@ export async function createAccountAction({ request }: ActionFunctionArgs) {
         if (error instanceof ZodError) {
             const messageObject = error.issues.reduce<Record<string,string[]>>((acc, issue)=>{
                 const key = String(issue.path[0])
-                acc[key] = [...(acc.key??[]), issue.message]
+                acc[key] = [...(acc[key] ?? []), issue.message]
                 return acc
             },{});
             return messageObject;
