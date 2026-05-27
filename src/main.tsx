@@ -7,7 +7,7 @@ import { Home } from './pages/Home.tsx'
 import { Login, loginAction } from './pages/Login.tsx'
 import { createAccountAction, Register } from './pages/Register.tsx'
 import { UserProfile } from './pages/UserProfile.tsx'
-import { RootErrorBoundary } from './service/RootErrorBoundary.tsx'
+import { RootErrorBoundary } from './RootErrorBoundary.tsx'
 
 const router = createBrowserRouter([
     {
