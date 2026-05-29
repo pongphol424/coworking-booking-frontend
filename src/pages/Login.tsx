@@ -27,7 +27,7 @@ export async function loginAction({ request }: ActionFunctionArgs) {
 
     try {
         await validate(LoginSchema, loginData)
-        const res = await api.post('/auth/login', formData);
+        const res = await api.post('/auth/login', loginData);
         const email: string = res.data.email;
         return email;
 
@@ -76,7 +76,7 @@ export function Login() {
             login(actionReturn)
             navigate('/')
         }
-    }, [actionReturn])
+    }, [actionReturn, login, navigate])
 
     return (
         <>

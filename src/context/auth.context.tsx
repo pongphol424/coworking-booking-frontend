@@ -15,16 +15,20 @@ export function AuthProvider({children}:{children:ReactNode}){
     const [email, setEmail] = useState<string | null>(null);
     useEffect(()=>{
         const fetch = async()=>{
-            const res = await api.get('/auth/authUser')
-            setEmail(res.data.email)
+            try{
+                const res = await api.get('/auth/authUser')
+                setEmail(res.data.email)
+            }catch{
+                setEmail(null)
+            }
         }
         fetch()
-    },[])
-    const login = (email:string)=>setEmail(email)
+    },[]);
+    const login = (email:string)=>setEmail(email);
     const logout = async()=> {
-        await api.post('/auth/logout')   
-        setEmail(null)
-    }
+        await api.post('/auth/logout');
+        setEmail(null);
+    };
 
 
     return(
