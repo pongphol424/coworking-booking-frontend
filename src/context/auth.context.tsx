@@ -20,7 +20,7 @@ export function AuthProvider({children}:{children:ReactNode}){
         }
         fetch()
     },[])
-    const login = (a:string)=>setEmail(a)
+    const login = (email:string)=>setEmail(email)
     const logout = async()=> {
         await api.post('/auth/logout')   
         setEmail(null)
