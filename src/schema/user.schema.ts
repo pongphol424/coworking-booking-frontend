@@ -6,15 +6,18 @@ import * as z from 'zod';
 export const UserBaseSchema = z.object({
     email: z.email().trim().min(1).max(255)
 });
-export type UserBase = z.infer<typeof UserBaseSchema>;
 
 export const RegisterSchema = UserBaseSchema.extend({
     firstName: z.string().trim().min(1).max(100),
     lastName: z.string().trim().min(1).max(100),
-    phoneNumber: z.string().trim().min(10).max(25).regex(/^[0-9]{10}$/),
+    phoneNumber: z.string().trim().min(10).max(25).regex(/^[0-9]/),
     password: z.string().trim().min(8).max(255)
 });
-export type Register = z.infer<typeof RegisterSchema>;
+
+export const LoginSchema = UserBaseSchema.extend({
+    password: z.string().trim().min(8).max(255)
+});
+
 
 export const UserProfileSchema = RegisterSchema.omit({password:true});
 export type UserProfile = z.infer<typeof UserProfileSchema>;
