@@ -3,7 +3,7 @@ import { api } from "../api/axios";
 import { useAuth } from "../context/auth.context";
 import { useEffect } from "react";
 import { AxiosError } from "axios";
-import { LoginSchema} from "../schema/user.schema";
+import { LoginSchema } from "../schema/user.schema";
 import { validate } from "../service/validate";
 import { ZodError } from "zod";
 
@@ -13,10 +13,7 @@ interface LoginFormErrors {
     message?: string
 }
 
-interface ValidateBackendReturn {
-    path: string[]
-    message: string
-}
+type BackendValidationError = Record<string, string[]>
 
 export async function loginAction({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
@@ -34,21 +31,14 @@ export async function loginAction({ request }: ActionFunctionArgs) {
     } catch (error: any) {
         if (error instanceof AxiosError) {
             if (error.response?.data) {
-                if (error.response.data.error) {
-                    const errorData: ValidateBackendReturn[] = error.response.data.error
-                    const messageObject = errorData.reduce<Record<string, string[]>>(
-                        (acc, issue) => {
-                            const key = String(issue.path[0]);
-                            acc[key] = [...(acc[key] ?? []), issue.message];
-                            return acc;
-                        }, {});
-                    return messageObject;
+                if (error.response.data.code === "VALIDATION_ERROR") {
+                    const errors: BackendValidationError = error.response.data.error
+                    return errors
                 }
-                if (error.response.data.message) {
-                    const message = error.response.data.message;
+                if (error.response.data.code === "INVALID_CREDENTIALS") {
+                    const message = "Invalid email or password";
                     return { message };
                 };
-
             };
         };
 
