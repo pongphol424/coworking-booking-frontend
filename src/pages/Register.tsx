@@ -13,10 +13,7 @@ interface RegisterFormErrors {
     phoneNumber?: string[]
     message?: string[]
 }
- interface ValidateBackendReturn{
-    path: string[]
-    message: string
- }
+type BackendValidationError = Record<string, string[]>
 
 export async function createAccountAction({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
@@ -31,38 +28,57 @@ export async function createAccountAction({ request }: ActionFunctionArgs) {
     } catch (error: any) {
         if (error instanceof AxiosError) {
             if (error.response?.data) {
-                if (error.response.data.error) {
-                    const errorData:ValidateBackendReturn[] = error.response.data.error
-                    const messageObject = errorData.reduce<Record<string, string[]>>((acc, issue) => {
-                    const key = String(issue.path[0])
-                    acc[key] = [...(acc[key] ?? []), issue.message]
-                    return acc
-                }, {});
-                return messageObject
+                const response = error.response.data;
+                if (response.code === "VALIDATION_ERROR") {
+                    const errors: BackendValidationError = response.errors
+                    return errors;
                 }
-                if(error.response.data.message){
+                if (response.code === "DUPLICATE_ENTRY") {
+                    const errors: RegisterFormErrors = {};
+                    if (response.errors.EMAIL_ALREADY_EXISTS) {
+                        errors.email = ['Email already exists'];
+                    }
+                    if (response.errors.PHONE_NUMBER_ALREADY_EXISTS) {
+                        errors.phoneNumber = ["Phone number already exists"];
+                    }
+                    return errors;
+                }
+
+                if (response.code === "EMAIL_ALREADY_EXISTS") {
+                    const errors: RegisterFormErrors = {
+                        email: ['Email already exists']
+                    };
+                    return errors;
+                }
+                if (response.errors === "PHONE_NUMBER_ALREADY_EXISTS") {
+                    const errors:RegisterFormErrors ={
+                        phoneNumber: ["Phone number already exists"]
+                    };
+                    return errors;
+                }
+                if (error.response.data.message) {
                     const message = error.response.data.message
-                    return {message}
+                    return { message }
                 }
             }
         }
-            if (error instanceof ZodError) {
-                const messageObject = error.issues.reduce<Record<string, string[]>>((acc, issue) => {
-                    const key = String(issue.path[0])
-                    acc[key] = [...(acc[key] ?? []), issue.message]
-                    return acc
-                }, {});
-                return messageObject;
-            }
-            throw error
+        if (error instanceof ZodError) {
+            const messageObject = error.issues.reduce<Record<string, string[]>>((acc, issue) => {
+                const key = String(issue.path[0])
+                acc[key] = [...(acc[key] ?? []), issue.message]
+                return acc
+            }, {});
+            return messageObject;
         }
+        throw error
     }
+}
 
 export function Register() {
     let actionData = useActionData<RegisterFormErrors | null>()
     return (
         <>
-            <div>Register</div>
+            <h1>Register</h1>
             <Form method="post">
                 <div style={{ width: 800, margin: "auto" }}>
                     <div style={{ position: "relative" }}>
