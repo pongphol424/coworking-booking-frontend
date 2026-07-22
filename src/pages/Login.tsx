@@ -2,18 +2,15 @@ import { Form, useActionData, useNavigate, type ActionFunctionArgs } from "react
 import { api } from "../api/axios";
 import { useAuth } from "../context/auth.context";
 import { useEffect } from "react";
-import { AxiosError } from "axios";
 import { LoginSchema } from "../schema/user.schema";
 import { validate } from "../service/validate";
-import { ZodError } from "zod";
+import { TransformError } from "../utils/transformErrors";
 
 interface LoginFormErrors {
-    email?: string[]
-    password?: string[]
+    email?: string
+    password?: string
     message?: string
 }
-
-type BackendValidationError = Record<string, string[]>
 
 export async function loginAction({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
@@ -29,30 +26,7 @@ export async function loginAction({ request }: ActionFunctionArgs) {
         return email;
 
     } catch (error: any) {
-        if (error instanceof AxiosError) {
-            if (error.response?.data) {
-                if (error.response.data.code === "VALIDATION_ERROR") {
-                    const errors: BackendValidationError = error.response.data.error
-                    return errors
-                }
-                if (error.response.data.code === "INVALID_CREDENTIALS") {
-                    const message = "Invalid email or password";
-                    return { message };
-                };
-            };
-        };
-
-        if (error instanceof ZodError) {
-            const messageObject = error.issues.reduce<Record<string, string[]>>(
-                (acc, issue) => {
-                    const key = String(issue.path[0]);
-                    acc[key] = [...(acc[key] ?? []), issue.message];
-                    return acc;
-                }, {});
-            return messageObject;
-        };
-
-        throw error;
+       return TransformError(error)
     }
 }
 
