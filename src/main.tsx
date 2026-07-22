@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './pages/Home.tsx'
 import { Login, loginAction } from './pages/Login.tsx'
 import { createAccountAction, Register } from './pages/Register.tsx'
-import { UserProfile } from './pages/UserProfile.tsx'
+import { updateAccountAction, UserProfile } from './pages/UserProfile.tsx'
 import { RootErrorBoundary } from './RootErrorBoundary.tsx'
 
 const router = createBrowserRouter([
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
             {index:true, element:<Home/>},
             {path:"/login",element:<Login/>,action:loginAction},
             {path:"/register",element:<Register/>,action:createAccountAction},
-            {path:"/profile",element:<UserProfile/>}
+            {path:"/profile",element:<UserProfile/>,action:updateAccountAction}
         ]
     }
 ])
