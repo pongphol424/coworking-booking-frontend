@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
-import { api } from "../api/axios"
+import { api, setLogout } from "../api/axios"
 
 
 interface AuthContextType{
@@ -13,6 +13,12 @@ const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({children}:{children:ReactNode}){
     const [email, setEmail] = useState<string | null>(null);
+    const axiosSetLogout = ()=> {
+        setLogout(()=>
+            setEmail(null)
+        )
+    };
+
     useEffect(()=>{
         const fetch = async()=>{
             try{
@@ -23,7 +29,9 @@ export function AuthProvider({children}:{children:ReactNode}){
             }
         }
         fetch()
+        axiosSetLogout()
     },[]);
+
     const login = (email:string)=>setEmail(email);
     const logout = async()=> {
         await api.post('/auth/logout');
