@@ -16,9 +16,13 @@ export function AuthProvider({children}:{children:ReactNode}){
     const [email, setEmail] = useState<string | null>(null);
     const [role, setRole] = useState<any |null >(null);
     const axiosSetLogout = ()=> {
-        setLogout(()=>
-            setEmail(null)
-        )
+        setLogout(logout)
+    };
+
+    const login = (email:string)=>setEmail(email);
+    const logout = async()=> {
+        await api.post('/auth/logout');
+        setEmail(null);
     };
 
     useEffect(()=>{
