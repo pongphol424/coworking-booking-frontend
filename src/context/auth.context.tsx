@@ -4,6 +4,7 @@ import { api, setLogout } from "../api/axios"
 
 interface AuthContextType{
     email: string | null
+    role: any | null
     login: (email: string) => void
     logout: () => void
 }
