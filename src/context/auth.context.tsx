@@ -14,6 +14,7 @@ const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({children}:{children:ReactNode}){
     const [email, setEmail] = useState<string | null>(null);
+    const [role, setRole] = useState<any |null >(null);
     const axiosSetLogout = ()=> {
         setLogout(()=>
             setEmail(null)
@@ -25,6 +26,7 @@ export function AuthProvider({children}:{children:ReactNode}){
             try{
                 const res = await api.get('/auth/authUser')
                 setEmail(res.data.email)
+                setRole(res.data.isAdmin)
             }catch{
                 setEmail(null)
             }
@@ -33,16 +35,9 @@ export function AuthProvider({children}:{children:ReactNode}){
         axiosSetLogout()
     },[]);
 
-    const login = (email:string)=>setEmail(email);
-    const logout = async()=> {
-        await api.post('/auth/logout');
-        setEmail(null);
-    };
-
-
     return(
         <>
-        <AuthContext.Provider value={{email,login,logout}}>
+        <AuthContext.Provider value={{email,role,login,logout}}>
             {children}
         </AuthContext.Provider>
         </>
