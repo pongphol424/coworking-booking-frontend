@@ -10,7 +10,7 @@ const apiErrorCodeMap: Record<string, { field: string, message: string }> = {
 }
 
 const zodErrorCodeMap: Record<string, string> = {
-    too_big: "too long" ,
+    too_big: "too long",
     too_small: "too short",
     invalid_format: "invalid format",
     invalid_type: "invalid format"
@@ -20,8 +20,11 @@ const errorFieldMap: Record<string, string> = {
     firstName: "First Name",
     lastName: "Last Name",
     email: "Email",
-    password:"Password",
-    phoneNumber: "Phone number"
+    password: "Password",
+    phoneNumber: "Phone number",
+    roomTypeName: "Room type name",
+    capacity: "Capacity",
+    price: "Price"
 }
 
 export function TransformError(error: any): Record<string, string> {
@@ -41,7 +44,7 @@ export function TransformError(error: any): Record<string, string> {
                     const messageMapped = zodErrorCodeMap[value.code];
                     if (messageMapped) {
                         const fieldMapped = errorFieldMap[key];
-                        errors[key] = fieldMapped && !errors[key] ? `${fieldMapped} ${messageMapped}` : 
+                        errors[key] = fieldMapped && !errors[key] ? `${fieldMapped} ${messageMapped}` :
                             `${errors[key]}, ${messageMapped}`;
                     }
                 }
@@ -73,13 +76,13 @@ export function TransformError(error: any): Record<string, string> {
             const key = String(issue.path[0]);
             const fieldMapped = errorFieldMap[key];
             const phoneNumberErrorMessage: string | null = key === "phoneNumber" ? issue.message : null
-            acc[key] = !acc[key] && phoneNumberErrorMessage  ? `${phoneNumberErrorMessage}` :
-                fieldMapped && !acc[key] ? `${fieldMapped} ${zodErrorCodeMap[issue.code]}` :
-                zodErrorCodeMap[issue.code] ? `${acc[key]}, ${zodErrorCodeMap[issue.code]}` : acc[key];
+            acc[key] = !acc[key] && phoneNumberErrorMessage ? `${phoneNumberErrorMessage}` :
+                !acc[key] && fieldMapped ? `${fieldMapped} ${zodErrorCodeMap[issue.code]}` :
+                    zodErrorCodeMap[issue.code] ? `${acc[key]}, ${zodErrorCodeMap[issue.code]}` : acc[key];
             return acc
         }, {});
         return messageObject;
     }
 
-    throw(error)
+    throw (error)
 }
