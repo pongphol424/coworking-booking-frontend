@@ -39,6 +39,7 @@ export function UserProfile() {
     const { login, logout } = useAuth()
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [isDisabled, setIsDisabled] = useState(true)
+    const [formKey, setFormKey] = useState(0)
     useEffect(() => {
         const fetch = async () => {
             try {
@@ -54,12 +55,16 @@ export function UserProfile() {
         }
         fetch()
     }, [actionData])
+    const handleDisabled = ()=>{
+        setIsDisabled(!isDisabled);
+        setFormKey(prev => prev+1);
+    }
 
     return (
         <>
             <div style={{ position: "relative" }}>
                 <h1>User Profile</h1>
-                <Form method="post">
+                <Form method="post" key={formKey}>
                     <div style={{ width: 800, margin: "auto" }}>
                         <div>
 
@@ -142,8 +147,8 @@ export function UserProfile() {
                     </div>
                 </Form>
                 {isDisabled ?
-                    <button onClick={() => setIsDisabled(!isDisabled)}>Edit Profile</button> :
-                    <button onClick={() => setIsDisabled(!isDisabled)}>Cancel</button>
+                    <button onClick={handleDisabled}>Edit Profile</button> :
+                    <button onClick={handleDisabled}>Cancel</button>
                 }
                 {typeof (actionData) !== "string" &&
                     actionData?.message &&
