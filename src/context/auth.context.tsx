@@ -4,7 +4,7 @@ import { api, setLogout } from "../api/axios"
 
 interface AuthContextType{
     email: string | null
-    role: any | null
+    role: boolean
     login: (email: string) => void
     logout: () => void
 }
@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({children}:{children:ReactNode}){
     const [email, setEmail] = useState<string | null>(null);
-    const [role, setRole] = useState<any |null >(null);
+    const [role, setRole] = useState<boolean>(false);
     const axiosSetLogout = ()=> {
         setLogout(logout)
     };
@@ -37,7 +37,7 @@ export function AuthProvider({children}:{children:ReactNode}){
         }
         fetch()
         axiosSetLogout()
-    },[]);
+    },[email]);
 
     return(
         <>
