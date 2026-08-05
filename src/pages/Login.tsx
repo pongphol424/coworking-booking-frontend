@@ -33,14 +33,16 @@ export async function loginAction({ request }: ActionFunctionArgs) {
 export function Login() {
     const actionReturn = useActionData<string | LoginFormErrors | null>()
     const navigate = useNavigate()
-    const { login } = useAuth()
+    const { login, logout } = useAuth()
 
     useEffect(() => {
         if (typeof (actionReturn) === "string") {
             login(actionReturn)
             navigate('/')
+        }else{
+            logout()
         }
-    }, [actionReturn, login, navigate])
+    }, [actionReturn, login, logout, navigate])
 
     return (
         <>
