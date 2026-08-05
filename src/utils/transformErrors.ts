@@ -29,7 +29,9 @@ export function TransformError(error: any): Record<string, string> {
         const response = error.response.data;
         const mapped = apiErrorCodeMap[response.code];
         if (mapped) {
-            return mapped;
+            const error: Record<string, string> = {};
+            error[mapped.field] = mapped.message
+            return error;
         }
 
         if (response.code === "VALIDATION_ERROR") {
