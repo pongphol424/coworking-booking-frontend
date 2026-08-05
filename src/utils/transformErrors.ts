@@ -6,7 +6,7 @@ const apiErrorCodeMap: Record<string, { field: string, message: string }> = {
     INVALID_CREDENTIALS: { field: "message", message: "Invalid email or password" },
     EMAIL_ALREADY_EXISTS: { field: "email", message: "Email already exists" },
     PHONE_NUMBER_ALREADY_EXISTS: { field: "phoneNumber", message: "Phone number already exists" },
-
+    ROOM_TYPE_NAME_ALREADY_EXISTS: { field: "roomTypeName", message: "Room type name already exists" }
 }
 
 const zodErrorCodeMap: Record<string, string> = {
