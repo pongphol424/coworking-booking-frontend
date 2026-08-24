@@ -1,0 +1,8 @@
+:root {
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-pill: 50px;
+
+  --z-navbar: 999;
+  --z-navbar-dropdown: 9999;
+}

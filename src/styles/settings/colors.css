@@ -1,0 +1,23 @@
+:root {
+    --color-bg: #5d6392;
+    --color-text: #6a5ba8;
+    --color-text-input: #0d2020;
+    --color-text-error: #a85b5b;
+
+    --color-input-field: #fff9f1;
+    --color-input-field-border: #9be4eb;
+
+    --color-button:#6a5ba8;
+    --color-button-submit:#ad9fe3;
+    --color-button-submit-hover:#cdc4f2;
+    --color-button-submit-active:#98fad1;
+    --color-button-cancel-active:#f77a7a;
+
+    --color-box-bg: #f4b8da;
+    --color-box-hover: #f9cee7;
+    --color-box-active: #f7bdca;
+
+    --color-navbar-bg: #e7c6fa;
+    --color-navbar-dropdown-hover: #ffdef0;
+    --color-navbar-dropdown-sub-hover: #e6c4d7;
+}

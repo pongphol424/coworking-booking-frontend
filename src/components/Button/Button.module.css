@@ -1,0 +1,28 @@
+.submit,
+.button,
+.cancel {
+    min-height: 38px;
+    min-width: 120px;
+    margin-top: 20px;
+    background: var(--color-button-submit);
+    border-radius: var(--radius-pill);
+}
+
+
+.submit:hover,
+.cancel:hover {
+    background-color: var(--color-button-submit-hover);
+}
+
+.button:active {
+    background-color: var(--color-box-hover);
+}
+
+.cancel:active{
+    background-color: var(--color-button-cancel-active);
+}
+
+
+.submit:active {
+    background-color: var(--color-button-submit-active);
+}

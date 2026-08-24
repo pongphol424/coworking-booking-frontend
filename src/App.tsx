@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import './App.css'
-import { Navbar } from './Components/Navbar'
+import { Navbar } from './components/Navbar/Navbar'
 import { AuthProvider } from './context/auth.context'
 
 function App() {
@@ -9,7 +8,9 @@ function App() {
     <>
       <AuthProvider>
         <Navbar/>
-        <Outlet/>
+        <main className='page-content'>
+          <Outlet/>
+        </main>
       </AuthProvider>
     </>
   )

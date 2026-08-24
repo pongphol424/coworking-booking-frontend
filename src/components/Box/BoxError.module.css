@@ -1,0 +1,22 @@
+.box {
+    position: relative;
+
+    width: 450px;
+    height: 70px;
+    display: none;
+
+    text-align: center;
+    align-content: center;
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+
+    border-radius: var(--radius-sm);
+    font: inherit;
+    background-color: var(--color-box-bg);
+    color: var(--color-text-error);
+}
+
+.box.active{
+    display: block;
+}

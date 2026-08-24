@@ -1,0 +1,117 @@
+.dropdownLabel {
+  background-color: var(--color-box-bg);
+  color: var(--color-text);
+  position: relative;
+  left: 1.5%;
+
+  box-sizing: border-box;
+  width: 180px;
+
+  margin: 4px;
+  padding: 15px;
+
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  text-align: center;
+}
+
+.dropdown {
+  position: absolute;
+  z-index: var(--z-navbar-dropdown);
+  display: none;
+  top: 100%;
+  left: 0%;
+
+  width: 325px;
+
+  border-radius: var(--radius-md);
+  background-color: var(--color-box-hover);
+}
+
+.dropdownItem {
+  position: relative;
+
+  height: 35px;
+
+  padding-left: 10%;
+  border-radius: var(--radius-sm);
+
+  text-align: left;
+  text-decoration: none;
+  color: var(--color-text);
+  background-color: var(--color-box-hover);
+}
+
+.dropdownSub {
+  position: absolute;
+  display: none;
+  top: 0%;
+  left: 100%;
+  width: 325px;
+
+  border-radius: var(--radius-md);
+  background-color: var(--color-navbar-dropdown-hover);
+}
+
+.dropdownSubItem {
+  position: relative;
+
+  height: 35px;
+
+  padding-left: 10%;
+  border-radius: var(--radius-sm);
+
+  text-align: left;
+  text-decoration: none;
+  color: var(--color-text);
+  background-color: var(--color-navbar-dropdown-hover);
+}
+
+.dropdownLabel:hover {
+  background-color: var(--color-box-hover);
+}
+
+.dropdownItem:hover {
+  background-color: var(--color-navbar-dropdown-hover);
+}
+
+.dropdownSubItem:hover {
+  background-color: var(--color-navbar-dropdown-sub-hover);
+}
+
+.dropdownLabel:hover .dropdown,
+.dropdownItem:hover .dropdownSub {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownLabel:has(.dropdownItem:active) {
+  background-color: var(--color-box-hover);
+}
+
+.dropdownItem:has(.dropdownSubItem:active) {
+  background-color: var(--color-navbar-dropdown-hover);
+}
+
+.dropdownItem:active,
+.dropdownSubItem:active {
+  background-color: var(--color-box-active);
+}
+
+@media (max-width: 425px) {
+  .dropdownLabel {
+    display: none;
+  }
+
+  .dropdown,
+  .dropdownSub{
+    width: 80%;
+  }
+
+  .active {
+    width: 70%;
+    display: block;
+    left: 7%;
+  }
+}

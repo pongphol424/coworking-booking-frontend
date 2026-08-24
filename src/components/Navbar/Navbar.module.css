@@ -1,0 +1,33 @@
+.navbar {
+  position: fixed;
+  display: flex;
+  z-index: var(--z-navbar);
+  left: 0.5%;
+
+  width: 95%;
+  font-size: 1.5rem;
+
+  padding: 10px;
+  margin: 15px auto;
+
+  background-color: var(--color-navbar-bg);
+  border-radius: var(--radius-pill);
+}
+
+.hamburger {
+  position: relative;
+  display: none;
+}
+
+@media (max-width: 425px) {
+  .navbar {
+    font-size: 1.2rem;
+    flex-direction: column;
+    border-radius: var(--radius-sm);
+    width: 80%;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

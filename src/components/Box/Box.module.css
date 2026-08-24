@@ -1,0 +1,26 @@
+.box {
+  position: relative;
+
+  padding: 18px;
+  margin: 20px;
+
+  border-radius: var(--radius-sm);
+  font: inherit;
+  cursor: pointer;
+  background-color: var(--color-box-bg);
+}
+
+.box-link {
+  position: relative;
+
+  padding: 18px;
+  margin: 20px;
+
+  background-color: var(--color-box-bg);
+  color: var(--color-text);
+}
+
+
+.box:hover {
+  background-color: var(--color-box-hover);
+}

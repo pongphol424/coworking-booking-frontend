@@ -1,0 +1,19 @@
+.form{
+    background-color: var(--color-box-bg);
+    position: relative;
+    left: 5%;
+
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    width: 600px;
+
+    border-radius: var(--radius-sm);
+}
+
+.header{
+    position: relative;
+    margin-bottom: 25px;
+    font-weight: bolder;
+    font-size: var(--font-size-lg);
+}

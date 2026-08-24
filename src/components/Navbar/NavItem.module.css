@@ -1,0 +1,39 @@
+.navItem {
+  background-color: var(--color-box-bg);
+  color: var(--color-text);
+  position: relative;
+  left: 1.5%;
+  
+  box-sizing: border-box;
+  width: 180px;
+
+  margin: 4px;
+  padding: 15px;
+
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  text-align: center;
+  font-size: var(--font-size-md);
+}
+
+
+
+.navItem:hover {
+  background-color: var(--color-box-hover);
+}
+
+.navItem:active{
+  background-color: var(--color-box-active);
+}
+
+@media (max-width: 425px) {
+  .navItem {
+    display: none;
+  }
+
+  .active {
+    width: 70%;
+    display: block;
+    left: 7%;
+  }
+}

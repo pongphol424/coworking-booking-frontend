@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { api } from "../api/axios"
-
+import { Box } from "../components/Box/Box";
 
 interface Roomtype {
     id: number,
@@ -24,19 +24,17 @@ export function Home() {
 
     return (
         <>
-            <div>Home</div>
-            <div>
-                {roomTypes.map((roomType) =>
-                    <div style={{ border: "1px solid grey", backgroundColor: "purple", padding: 10}}>
-                        <div>RoomType: {roomType.name}</div>
-                        <div>Description: {roomType.description}</div>
-                        <div>Capacity: {roomType.capacity}</div>
-                        <div>Facilities: {roomType.facilities.join(", ")}</div>
-                        <div>Status: {roomType.statusName}</div>
-                        <div>Price: {roomType.price}</div>
-                    </div>
-                )}
-            </div>
+            {roomTypes.map((roomType) => (
+                <Box key={roomType.id}>
+                    <div>RoomType: {roomType.name}</div>
+                    <div>Description: {roomType.description}</div>
+                    <div>Capacity: {roomType.capacity}</div>
+                    <div>Facilities: {roomType.facilities.join(", ")}</div>
+                    <div>Status: {roomType.statusName}</div>
+                    <div>Price: {roomType.price}</div>
+                </Box>
+            )
+            )}
         </>
     )
 }
