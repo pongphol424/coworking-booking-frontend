@@ -13,7 +13,7 @@ export function InputField({ label, error, name, ...inputProps }: InputFieldProp
     return (
         <>
             <div className={styles.fieldBox}>
-                <label key={label} className={styles.label}>
+                <label className={styles.label}>
                     {label}<br />
                     <input className={styles.field} name={name} {...inputProps}/>
                 </label>
