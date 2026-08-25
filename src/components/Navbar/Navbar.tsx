@@ -10,7 +10,6 @@ export function Navbar() {
     const { email, role, logout } = useAuth()
     const [isActive, setIsActive] = useState(false)
     const handleIsActive = () => {
-        console.log(isActive)
         setIsActive(!isActive)
     }
     return (
