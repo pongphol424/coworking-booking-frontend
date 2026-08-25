@@ -1,0 +1,14 @@
+.box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
+.header{
+    font-weight: bold;
+}
+
+.checkBox {
+    accent-color: var(--color-button-submit-active);
+}
