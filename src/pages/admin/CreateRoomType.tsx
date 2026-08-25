@@ -1,4 +1,4 @@
-import { Form, useActionData, type ActionFunctionArgs } from "react-router-dom";
+import { useActionData, type ActionFunctionArgs } from "react-router-dom";
 import { api } from "../../api/axios";
 import { validate } from "../../service/validate";
 import { CreateRoomTypeSchema, type RoomTypeCreateDto } from "../../schema/roomtype.schema";
@@ -7,6 +7,7 @@ import { FormBox } from "../../components/Form/FormBox";
 import { InputField } from "../../components/Form/InputField";
 import { BoxEror } from "../../components/Box/BoxError";
 import { Button } from "../../components/Button/Button";
+import { CheckBox } from "../../components/Form/CheckBox";
 
 interface CreateRoomTypeFormErrors {
     roomTypeName?: string
@@ -46,7 +47,7 @@ export function CreateRoomType() {
     return (
         <>
             <FormBox label="Create Room Type" method="post">
-                
+
                 <InputField
                     label="Room Type Name"
                     name="roomTypeName"
@@ -68,24 +69,18 @@ export function CreateRoomType() {
                     error={actionData?.price}
                     required />
 
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    {facilities.map((facility) =>
-                        <InputField
-                            label={facility.name}
-                            key={facility.id} name="facilities" type="checkbox" value={facility.id} />
-                    )}
-                </div>
+                <CheckBox label="Facility" name="facilities" checkList={facilities} />
 
                 <div>
-                    Description
+                    <span style={{fontWeight:"bold"}}>Description</span>
                     <br />
-                    <textarea name="description" rows={6}></textarea >
+                    <textarea name="description" rows={6} style={{width:"70%"}}></textarea >
                     {actionData?.description &&
                         <span style={{ position: "fixed", color: "red" }}> {actionData.description}</span>}
                 </div>
                 <Button buttonstyle="submit" type="submit">Submit</Button>
             </FormBox>
-            <BoxEror error={actionData?.message}/>
+            <BoxEror error={actionData?.message} />
         </>
     )
 }
