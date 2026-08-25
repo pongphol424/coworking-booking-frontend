@@ -13,7 +13,6 @@ const authErrorCodes = [
     "TOKEN_INVALID",
     "TOKEN_EXPIRED",
     "TOKEN_INVALID_PAYLOAD",
-    "INVALID_CREDENTIALS",
     "USER_INVALID_SCHEMA",
 ];
 

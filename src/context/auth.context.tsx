@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import { api, setLogout } from "../api/axios"
+import { useNavigate } from "react-router-dom"
 
 
-interface AuthContextType{
+interface AuthContextType {
     email: string | null
     role: boolean
     login: (email: string) => void
@@ -12,44 +13,47 @@ interface AuthContextType{
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-export function AuthProvider({children}:{children:ReactNode}){
+export function AuthProvider({ children }: { children: ReactNode }) {
+    const navigate = useNavigate()
     const [email, setEmail] = useState<string | null>(null);
     const [role, setRole] = useState<boolean>(false);
-    const axiosSetLogout = ()=> {
+
+    const login = (email: string) => setEmail(email);
+    const logout = async () => {
+        await api.post('/auth/logout');
+        setEmail(null);
+        navigate("/")
+    };
+
+    const axiosSetLogout = () => {
         setLogout(logout)
     };
 
-    const login = (email:string)=>setEmail(email);
-    const logout = async()=> {
-        await api.post('/auth/logout');
-        setEmail(null);
-    };
-
-    useEffect(()=>{
-        const fetch = async()=>{
-            try{
+    useEffect(() => {
+        const fetch = async () => {
+            try {
                 const res = await api.get('/auth/authUser')
                 setEmail(res.data.email)
                 setRole(res.data.isAdmin)
-            }catch{
+            } catch {
                 setEmail(null)
             }
         }
         fetch()
         axiosSetLogout()
-    },[email]);
+    }, []);
 
-    return(
+    return (
         <>
-        <AuthContext.Provider value={{email,role,login,logout}}>
-            {children}
-        </AuthContext.Provider>
+            <AuthContext.Provider value={{ email, role, login, logout }}>
+                {children}
+            </AuthContext.Provider>
         </>
     )
 }
 
-export function useAuth():AuthContextType {
-  const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider")
-  return ctx
+export function useAuth(): AuthContextType {
+    const ctx = useContext(AuthContext)
+    if (!ctx) throw new Error("useAuth must be used within AuthProvider")
+    return ctx
 }
