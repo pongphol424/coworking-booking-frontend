@@ -10,7 +10,7 @@ export const UserBaseSchema = z.object({
 export const RegisterSchema = UserBaseSchema.extend({
     firstName: z.string().trim().min(1).max(100),
     lastName: z.string().trim().min(1).max(100),
-    phoneNumber: z.string().trim().regex(/^0(2\d{7}|[3-9]\d{8})$/,{error:"Phone number must start with 0 and be 9 to 10 digits."}),
+    phoneNumber: z.string().trim().regex(/^0(2\d{7}|[3-9]\d{8})$/,{error:"Required 9 to 10 digits."}),
     password: z.string().trim().min(8).max(255)
 });
 
