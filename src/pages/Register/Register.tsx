@@ -24,18 +24,21 @@ export function Register() {
                     name="firstName"
                     type="text"
                     error={actionData?.firstName}
+                    required
                 />
                 <InputField
                     label="Last Name"
                     name="lastName"
                     type="text"
                     error={actionData?.lastName}
+                    required
                 />
                 <InputField
                     label="Email"
                     name="email"
                     type="email"
                     error={actionData?.email}
+                    required
                 />
                 
                 <InputField
@@ -43,15 +46,17 @@ export function Register() {
                     name="password"
                     type="password"
                     error={actionData?.password}
+                    required
                 />
 
                 <InputField
                     label="Phone Number"
                     name="phoneNumber"
                     type="tel"
-                    pattern="[0-9]"
+                    pattern="[0-9],{0-10}"
                     inputMode="numeric"
                     error={actionData?.phoneNumber}
+                    required
                 />
 
                 <Button buttonstyle="submit" type="submit">Create</Button>
