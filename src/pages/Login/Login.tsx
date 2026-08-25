@@ -15,17 +15,14 @@ interface LoginFormErrors {
 export function Login() {
     const actionData = useActionData<string| LoginFormErrors | null>()
     const navigate = useNavigate()
-    const { login, logout } = useAuth()
+    const { login } = useAuth()
 
     useEffect(() => {
         if (typeof (actionData) === "string") {
             login(actionData)
             navigate('/')
-        } else {
-            logout()
         }
-    }, [actionData, login, logout, navigate])
-    console.log(actionData)
+    }, [actionData, login, navigate])
     return (
         <>
             <FormBox label="Login" method="post">
