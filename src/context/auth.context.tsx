@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom"
 
 interface AuthContextType {
     email: string | null
-    role: boolean
-    login: (email: string) => void
+    isAdmin: boolean
+    login: (email: string, isAdmin: boolean) => void
     logout: () => void
 }
 
@@ -16,12 +16,16 @@ const AuthContext = createContext<AuthContextType | null>(null)
 export function AuthProvider({ children }: { children: ReactNode }) {
     const navigate = useNavigate()
     const [email, setEmail] = useState<string | null>(null);
-    const [role, setRole] = useState<boolean>(false);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-    const login = (email: string) => setEmail(email);
+    const login = (email: string, isAdmin: boolean) => {
+        setEmail(email);
+        setIsAdmin(isAdmin)
+    }
     const logout = async () => {
         await api.post('/auth/logout');
         setEmail(null);
+        setIsAdmin(false)
         navigate("/")
     };
 
@@ -34,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             try {
                 const res = await api.get('/auth/authUser')
                 setEmail(res.data.email)
-                setRole(res.data.isAdmin)
+                setIsAdmin(res.data.isAdmin)
             } catch {
                 setEmail(null)
             }
@@ -45,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return (
         <>
-            <AuthContext.Provider value={{ email, role, login, logout }}>
+            <AuthContext.Provider value={{ email, isAdmin, login, logout }}>
                 {children}
             </AuthContext.Provider>
         </>
