@@ -22,3 +22,8 @@
     font-weight: bold;
     color: var(--color-text-error);
 }
+
+.field:disabled {
+    background-color: var(--color-input-field-disable);
+    border: 0px;
+}
