@@ -17,7 +17,8 @@ export async function loginAction({ request }: ActionFunctionArgs) {
         await validate(LoginSchema, loginData)
         const res = await api.post('/auth/login', loginData);
         const email: string = res.data.email;
-        return email;
+        const isAdmin:boolean = res.data.isAdmin
+        return {email,isAdmin};
 
     } catch (error: any) {
         return TransformError(error)
