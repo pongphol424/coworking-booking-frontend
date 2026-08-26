@@ -1,10 +1,11 @@
 :root {
-    --color-bg: #5d6392;
+    --color-bg: #47496a;
     --color-text: #6a5ba8;
     --color-text-input: #0d2020;
     --color-text-error: #a85b5b;
 
     --color-input-field: #fff9f1;
+    --color-input-field-disable: #6969a7;
     --color-input-field-border: #9be4eb;
 
     --color-button:#6a5ba8;
