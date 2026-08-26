@@ -7,7 +7,7 @@ import { Dropdown } from "./Dropdown";
 
 
 export function Navbar() {
-    const { email, role, logout } = useAuth()
+    const { email, isAdmin, logout } = useAuth()
     const [isActive, setIsActive] = useState(false)
     const handleIsActive = () => {
         setIsActive(!isActive)
@@ -18,7 +18,7 @@ export function Navbar() {
             <NavItem to="/" isActive={isActive} >Home</NavItem>
             {email ?
                 <>
-                    {role &&
+                    {isAdmin &&
                         <Dropdown
                             isActive={isActive}
                             label="Back Office &#9662;"
