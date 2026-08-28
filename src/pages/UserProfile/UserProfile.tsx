@@ -21,7 +21,7 @@ interface UpdateFormErrors {
 export function UserProfile() {
     const navigate = useNavigate()
     let actionData = useActionData<string | UpdateFormErrors | null>()
-    const { login, logout } = useAuth()
+    const { setEmail, logout } = useAuth()
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [isDisabled, setIsDisabled] = useState(true)
     const [formKey, setFormKey] = useState(0)
@@ -31,7 +31,7 @@ export function UserProfile() {
                 const res = await api.get('/user/profile')
                 setProfile(res.data)
                 if (typeof (actionData) === "string") {
-                    login(actionData)
+                    setEmail(actionData)
                 }
             } catch (error) {
                 logout()

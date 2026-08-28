@@ -8,6 +8,7 @@ interface AuthContextType {
     isAdmin: boolean
     login: (email: string, isAdmin: boolean) => void
     logout: () => void
+    setEmail: (email: string) => void
 }
 
 
@@ -49,7 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return (
         <>
-            <AuthContext.Provider value={{ email, isAdmin, login, logout }}>
+            <AuthContext.Provider value={{ email, isAdmin, login, logout, setEmail }}>
                 {children}
             </AuthContext.Provider>
         </>
