@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import { api, setLogout } from "../api/axios"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 
 interface AuthContextType {
@@ -35,17 +36,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     useEffect(() => {
+        const controller = new AbortController()
         const fetch = async () => {
             try {
-                const res = await api.get('/auth/authUser')
+                const res = await api.get('/auth/authUser',{
+                    signal: controller.signal
+                })
                 setEmail(res.data.email)
                 setIsAdmin(res.data.isAdmin)
-            } catch {
+            } catch(err) {
+                if(axios.isCancel(err)) return
                 setEmail(null)
             }
         }
         fetch()
         axiosSetLogout()
+        return ()=> controller.abort()
     }, []);
 
     return (
