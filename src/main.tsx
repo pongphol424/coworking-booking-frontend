@@ -10,12 +10,14 @@ import { Register } from './pages/Register/Register.tsx'
 import { createAccountAction } from './pages/Register/Register.action.ts'
 import { UserProfile } from './pages/UserProfile/UserProfile.tsx'
 import { RootErrorBoundary } from './RootErrorBoundary.tsx'
-import { CreateRoomType, createRoomtypeAction } from './pages/admin/RoomType/CreateRoomType.tsx'
+import { CreateRoomType } from './pages/admin/RoomType/CreateRoomType.tsx'
 import 'normalize.css'
 import { updateAccountAction } from './pages/UserProfile/UserProfile.action.ts'
 import { homeLoader } from './pages/Home.loader.ts'
 import { RoomTypeManagement } from './pages/admin/RoomType/RoomTypeManagement.tsx'
 import { roomTypeSearchHandle } from './components/SearchFilterBar/RoomType/RoomTypeSearchForm.handleSubmit.ts'
+import { userProfileLoader } from './pages/UserProfile/UserProfile.loader.ts'
+import { createRoomtypeAction } from './pages/admin/RoomType/CreateRoomType.action.ts'
 
 
 
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
             { index: true, element: <Home />, loader: homeLoader },
             { path: "/login", element: <Login />, action: loginAction },
             { path: "/register", element: <Register />, action: createAccountAction },
-            { path: "/profile", element: <UserProfile />, action: updateAccountAction },
+            { path: "/profile", element: <UserProfile />, loader: userProfileLoader, action: updateAccountAction },
             { path: "/admin/createRoomType", element: <CreateRoomType />, action: createRoomtypeAction },
             { path: "/admin/updateRoomType", element: <RoomTypeManagement/>, loader: roomTypeSearchHandle}
         ]
