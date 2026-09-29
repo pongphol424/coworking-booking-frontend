@@ -34,6 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const clearContext = ()=>{
         setEmail(null)
         setIsAdmin(false)
+        navigate("/")
     }
 
     const axiosSetClearContext = () => {

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
 
 export const api = axios.create({
     baseURL: 'http://localhost:3000/api',
@@ -26,12 +25,10 @@ export const setClearContext = (callback: () => void) => {
 
 
 api.interceptors.response.use(null, (error) => {
-    const navigate = useNavigate()
     if ( authErrorCodes.includes(error.response?.data?.code) ) {
         if (clearContext) {
             clearContext()
         }
-        navigate('/')
         return
     }
     return Promise.reject(error)
