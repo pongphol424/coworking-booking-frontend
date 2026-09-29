@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
-import { api, setLogout } from "../api/axios"
+import { api, setClearContext } from "../api/axios"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
@@ -31,8 +31,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         navigate("/")
     };
 
-    const axiosSetLogout = () => {
-        setLogout(logout)
+    const clearContext = ()=>{
+        setEmail(null)
+        setIsAdmin(false)
+    }
+
+    const axiosSetClearContext = () => {
+        setClearContext(clearContext)
     };
 
     useEffect(() => {
@@ -50,7 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             }
         }
         fetch()
-        axiosSetLogout()
+        axiosSetClearContext()
         return ()=> controller.abort()
     }, []);
 
