@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
-import { api } from "../../api/axios";
 import { type UserProfile } from "../../schema/user.schema";
-import { Form, useActionData, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/auth.context";
+import { useActionData, useLoaderData } from "react-router-dom";
 import { FormBox } from "../../components/Form/FormBox";
 import { InputField } from "../../components/Form/InputField";
 import { Button } from "../../components/Button/Button";
 import { BoxEror } from "../../components/Box/BoxError";
+import { useAuth } from "../../context/auth.context";
 
 interface UpdateFormErrors {
     firstName?: string
@@ -19,27 +18,18 @@ interface UpdateFormErrors {
 
 
 export function UserProfile() {
-    const navigate = useNavigate()
-    let actionData = useActionData<string | UpdateFormErrors | null>()
-    const { setEmail, logout } = useAuth()
+    const user = useLoaderData();
+    const actionData = useActionData<UpdateFormErrors | null>();
+    const { setEmail } = useAuth();
     const [profile, setProfile] = useState<UserProfile | null>(null);
-    const [isDisabled, setIsDisabled] = useState(true)
-    const [formKey, setFormKey] = useState(0)
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [formKey, setFormKey] = useState(0);
+
     useEffect(() => {
-        const fetch = async () => {
-            try {
-                const res = await api.get('/user/profile')
-                setProfile(res.data)
-                if (typeof (actionData) === "string") {
-                    setEmail(actionData)
-                }
-            } catch (error) {
-                logout()
-                navigate('/')
-            }
-        }
-        fetch()
-    }, [actionData])
+        setProfile(user);
+        setEmail(user.email);
+    }, [user])
+
     const handleDisabled = () => {
         setIsDisabled(!isDisabled);
         setFormKey(prev => prev + 1);
@@ -55,7 +45,7 @@ export function UserProfile() {
                     defaultValue={profile?.firstName}
                     disabled={isDisabled}
                     required
-                    error={typeof (actionData) !== "string" ? actionData?.firstName : ""} />
+                    error={actionData?.firstName} />
 
                 <InputField
                     label="Last Name"
@@ -64,7 +54,7 @@ export function UserProfile() {
                     defaultValue={profile?.lastName}
                     disabled={isDisabled}
                     required
-                    error={typeof (actionData) !== "string" ? actionData?.lastName : ""} />
+                    error={actionData?.lastName} />
 
                 <InputField
                     label="Email"
@@ -73,7 +63,7 @@ export function UserProfile() {
                     defaultValue={profile?.email}
                     disabled={isDisabled}
                     required
-                    error={typeof (actionData) !== "string" ? actionData?.email : ""} />
+                    error={actionData?.email} />
 
                 <InputField
                     label="Phone Number"
@@ -83,7 +73,7 @@ export function UserProfile() {
                     defaultValue={profile?.phoneNumber}
                     disabled={isDisabled}
                     required
-                    error={typeof (actionData) !== "string" ? actionData?.phoneNumber : ""} />
+                    error={actionData?.phoneNumber} />
 
                 {!isDisabled ? <div>
                     <Button buttonstyle="submit" type="submit">Save</Button>
@@ -94,7 +84,7 @@ export function UserProfile() {
                 }
 
             </FormBox>
-            <BoxEror error={typeof (actionData) !== "string" ? actionData?.message : ""}></BoxEror>
+            <BoxEror error={actionData?.message}></BoxEror>
         </>
     )
 }

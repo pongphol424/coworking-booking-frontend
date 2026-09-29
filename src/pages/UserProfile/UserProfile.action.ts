@@ -16,7 +16,7 @@ export async function updateAccountAction({ request }: ActionFunctionArgs) {
         await validate(UserProfileSchema, updateData);
         const res = await api.patch('/user/updateProfile', updateData);
         alert('Update complete')
-        return res.data.email;
+        return ;
     } catch (error: any) {
         return TransformError(error)
     }
