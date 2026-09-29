@@ -28,6 +28,9 @@ export function UserProfile() {
     useEffect(() => {
         setProfile(user);
         setEmail(user.email);
+        if(!actionData){
+            setIsDisabled(true)
+        }
     }, [user])
 
     const handleDisabled = () => {
