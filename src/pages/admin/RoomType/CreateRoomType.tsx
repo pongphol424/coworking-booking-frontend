@@ -31,6 +31,7 @@ export function CreateRoomType() {
                     label="Room Type Name"
                     name="name"
                     type="text"
+                    autoComplete="off"
                     error={roomTypeErrors?.roomTypeName}
                     required />
 
