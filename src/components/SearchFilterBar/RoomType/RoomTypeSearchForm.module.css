@@ -1,0 +1,18 @@
+.form {
+  position: relative;
+  width: 100%;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.item{
+  margin-right: 25px;
+}
+
+.button {
+  display: flex;
+}

@@ -1,0 +1,14 @@
+.searchBar {
+    position: relative;
+
+    padding: 18px;
+    margin: 20px;
+
+    border-radius: var(--radius-sm);
+    font: inherit;
+    background-color: var(--color-box-bg);
+}
+
+.label {
+    font-size: var(--font-size-lg);
+}
