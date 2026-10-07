@@ -33,8 +33,8 @@ const router = createBrowserRouter([
             { path: "/login", element: <Login />, action: loginAction },
             { path: "/register", element: <Register />, action: createAccountAction },
             { path: "/profile", element: <UserProfile />, loader: userProfileLoader, action: updateAccountAction },
-            { path: "/admin/createRoomType", element: <CreateRoomType />, action: createRoomtypeAction },
-            { path: "/admin/updateRoomType", element: <RoomTypeManagement/>, loader: roomTypeSearchHandle}
+            { path: "/admin/room-types/new", element: <CreateRoomType />, action: createRoomtypeAction },
+            { path: "/admin/room-types", element: <RoomTypeManagement/>, loader: roomTypeSearchHandle},
         ]
     }
 ])
