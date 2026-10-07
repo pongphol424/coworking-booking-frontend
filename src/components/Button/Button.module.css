@@ -1,9 +1,13 @@
 .submit,
 .button,
 .cancel {
-    min-height: 38px;
-    min-width: 120px;
-    margin-top: 20px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 8px;
+
+    height: 38px;
+    width: 120px;
+
     background: var(--color-button-submit);
     border-radius: var(--radius-pill);
 }

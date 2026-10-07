@@ -6,21 +6,18 @@
 
   border-radius: var(--radius-sm);
   font: inherit;
-  cursor: pointer;
   background-color: var(--color-box-bg);
 }
 
-.box-link {
-  position: relative;
+.boxLink {
+  text-decoration: none;
 
-  padding: 18px;
-  margin: 20px;
-
-  background-color: var(--color-box-bg);
+  cursor: pointer;
+  font: inherit;
   color: var(--color-text);
 }
 
 
-.box:hover {
+.box:hover{
   background-color: var(--color-box-hover);
 }
