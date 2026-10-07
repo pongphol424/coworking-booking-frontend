@@ -34,7 +34,7 @@ export function RoomTypeSearchForm() {
     const navigate = useNavigate();
     const [resetKey, setResetKey] = useState(0)
     const resetSearch = () => {
-        navigate("/admin/updateRoomType");
+        navigate("/admin/room-types");
         setResetKey(prev=> prev + 1)
     }
     
