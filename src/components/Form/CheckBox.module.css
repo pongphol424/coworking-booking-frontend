@@ -1,14 +1,26 @@
-.box{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 2px;
+.box {
+    padding-right: 30px;
+    margin-bottom: 7px;
+    width: 100%;
 }
 
-.header{
+.header {
     font-weight: bold;
 }
 
+.item {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    width: fit-content;
+}
+
+.itemLabel {
+    width: fit-content;
+}
+
 .checkBox {
+    width: fit-content;
+
     accent-color: var(--color-button-submit-active);
 }

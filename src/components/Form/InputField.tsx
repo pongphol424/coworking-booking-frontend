@@ -9,12 +9,12 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 
 export function InputField({ label, error, name, ...inputProps }: InputFieldProps) {
-
+    
     return (
         <>
-            <div className={styles.fieldBox}>
+            <div className={styles.box}>
                 <label className={styles.label}>
-                    {label}<br />
+                    {label}
                     <input className={styles.field} name={name} {...inputProps}/>
                 </label>
                 {error && <span>{error}</span>}
