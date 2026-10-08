@@ -18,6 +18,9 @@ import { RoomTypeManagement } from './pages/admin/RoomType/RoomTypeManagement.ts
 import { roomTypeSearchHandle } from './components/SearchFilterBar/RoomType/RoomTypeSearchForm.handleSubmit.ts'
 import { userProfileLoader } from './pages/UserProfile/UserProfile.loader.ts'
 import { createRoomtypeAction } from './pages/admin/RoomType/CreateRoomType.action.ts'
+import { RoomTypeDetail } from './pages/admin/RoomType/RoomTypeDetail.tsx'
+import { roomTypeDetailLoader } from './pages/admin/RoomType/RoomTypeDetail.loader.ts'
+import { updateRoomTypeAction } from './pages/admin/RoomType/RoomTypeDetail.action.ts'
 
 
 
@@ -35,6 +38,7 @@ const router = createBrowserRouter([
             { path: "/profile", element: <UserProfile />, loader: userProfileLoader, action: updateAccountAction },
             { path: "/admin/room-types/new", element: <CreateRoomType />, action: createRoomtypeAction },
             { path: "/admin/room-types", element: <RoomTypeManagement/>, loader: roomTypeSearchHandle},
+            { path: "/admin/room-types/:id", element: <RoomTypeDetail/>, loader: roomTypeDetailLoader, action:updateRoomTypeAction}
         ]
     }
 ])
