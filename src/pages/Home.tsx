@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { RoomTypeList } from "../components/RoomList/RoomTypeList";
+import { RoomTypeList } from "../components/RoomType/RoomTypeList";
 import type { Roomtype } from "../constants/roomType";
 
 
