@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { facilityIds } from "../../constants/facilities"
 import type { CreateRoomTypeFormErrors } from "../../constants/roomType"
 import { BoxEror } from "../Box/BoxError"
@@ -9,7 +9,7 @@ import { InputField } from "../Form/InputField"
 
 
 interface RoomTypeFormProps {
-    label?: string | undefined
+    label: string
     method: 'get' | 'post' | 'put' | 'patch' | 'delete'
     defaultValues?: {
         name: string,
@@ -24,6 +24,11 @@ interface RoomTypeFormProps {
 
 export function RoomTypeForm({ method, label, defaultValues, errors }: RoomTypeFormProps) {
     const [isDisabled, setIsDisabled] = useState(true);
+    useEffect(()=>{
+        if(method === "post"){
+            setIsDisabled(false)
+        }
+    },[method])
     const handleDisabled = () => {
         setIsDisabled(!isDisabled);
     }
