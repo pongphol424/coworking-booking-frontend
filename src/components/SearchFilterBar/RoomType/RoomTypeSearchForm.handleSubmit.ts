@@ -36,10 +36,17 @@ export async function roomTypeSearchHandle({ request }: LoaderFunctionArgs) {
             status: url.searchParams.get("status") ? Number(url.searchParams.get("status")) : null,
             facilityIds: url.searchParams.getAll("facilityIds").map(Number)
         }
-        const res = await api.get('/admin/room-types', { params: queryParams })
-        return {
-            data: res.data,
-            queryParams: queryParams
+        try {
+            const res = await api.get('/admin/room-types', { params: queryParams })
+            return {
+                data: res.data,
+                queryParams: queryParams
+            }
+        } catch {
+            return {
+                data: [],
+                queryParams: queryParams
+            }
         }
     }
     return {
