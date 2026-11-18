@@ -1,24 +1,24 @@
 :root {
-    --color-bg: #47496a;
-    --color-text: #6a5ba8;
-    --color-text-input: #0d2020;
-    --color-text-error: #a85b5b;
+    --color-bg: #202831;
+    --color-text: #0d0d0e;
+    --color-text-input: #0d0d0e;
+    --color-text-error: #eb7676;
 
-    --color-input-field: #fff9f1;
-    --color-input-field-disable: #6969a7;
-    --color-input-field-border: #9be4eb;
+    --color-input-field: #f6f5f4;
+    --color-input-field-disable: #5b5b5d;
+    --color-input-field-border: #f7f3ed;
 
-    --color-button:#6a5ba8;
-    --color-button-submit:#ad9fe3;
-    --color-button-submit-hover:#cdc4f2;
-    --color-button-submit-active:#98fad1;
-    --color-button-cancel-active:#f77a7a;
+    --color-button:#D5B98C;
+    --color-button-submit:#D5B98C;
+    --color-button-submit-hover:#d8cbb5;
+    --color-button-submit-active:#f6ebd9;
+    --color-button-cancel-active:#f79d9d;
 
-    --color-box-bg: #f4b8da;
-    --color-box-hover: #f9cee7;
-    --color-box-active: #f7bdca;
+    --color-box-bg: #6b9cc4;
+    --color-box-hover: #8eb2d0;
+    --color-box-active: #adcbe3;
 
-    --color-navbar-bg: #e7c6fa;
-    --color-navbar-dropdown-hover: #ffdef0;
-    --color-navbar-dropdown-sub-hover: #e6c4d7;
+    --color-navbar-bg: #42596f;
+    --color-navbar-dropdown-hover: #adcbe3;
+    --color-navbar-dropdown-sub-hover: #cfe9ff;
 }

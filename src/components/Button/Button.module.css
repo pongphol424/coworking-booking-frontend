@@ -14,12 +14,13 @@
 
 
 .submit:hover,
+.button:hover,
 .cancel:hover {
     background-color: var(--color-button-submit-hover);
 }
 
 .button:active {
-    background-color: var(--color-box-hover);
+    background-color: var(--color-button-submit-active);
 }
 
 .cancel:active{
