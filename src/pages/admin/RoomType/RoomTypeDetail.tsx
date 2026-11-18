@@ -1,4 +1,4 @@
-import styles from "./RoomTypeDetail.module.css"
+import "./RoomTypeDetail.module.css"
 import { useActionData, useLoaderData, useSearchParams } from "react-router-dom"
 import { RoomTypeForm } from "../../../components/RoomType/RoomTypeForm"
 import type { Roomtype } from "../../../constants/roomType"
