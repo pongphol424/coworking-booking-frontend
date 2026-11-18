@@ -3,7 +3,7 @@ import styles from "./Button.module.css"
 
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-    buttonstyle: string
+    buttonstyle: "submit" | "button" | "cancel"
 }
 
 

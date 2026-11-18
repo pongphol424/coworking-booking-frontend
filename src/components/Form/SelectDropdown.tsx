@@ -3,8 +3,8 @@ import styles from "./SelectDropdown.module.css"
 
 interface SelectDropdownProps extends SelectHTMLAttributes<HTMLSelectElement> {
     label: string
-    options: { name: string, id: string}[]
-    placeholder: string
+    options: { name: string, id: string }[]
+    placeholder?: string
 }
 
 
@@ -17,14 +17,14 @@ export function SelectDropdown({ options, label, placeholder, ...selectProps }: 
                 <br />
 
                 <select className={styles.select} {...selectProps}>
-                    <option value="">{placeholder}</option>
+                    {placeholder && <option value="">{placeholder}</option>}
                     {options.map((item) => (
                         <option key={item.id} value={item.id}>
                             {item.name}
                         </option>
                     ))}
                 </select>
-                
+
             </label>
         </div>
     )
