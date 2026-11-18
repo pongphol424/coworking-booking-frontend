@@ -5,7 +5,8 @@ export interface Roomtype {
     capacity: number,
     price: number,
     statusName: string,
-    facilities: string[]
+    facilities: string[],
+    statusId: number
 }
 
 export interface CreateRoomTypeFormErrors {
