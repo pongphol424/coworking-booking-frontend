@@ -14,6 +14,7 @@ export async function createRoomtypeAction({ request }: ActionFunctionArgs) {
         capacity: Number(formData.get("capacity")),
         price: Number(formData.get("price")),
         description: String(formData.get("description")),
+        statusId: Number(formData.get("status")),
         facilityIds: formData.getAll("facilityIds").map(id => Number(id))
     }
     try {
