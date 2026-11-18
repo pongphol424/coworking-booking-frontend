@@ -1,0 +1,27 @@
+.flex {
+    display: flex;
+}
+
+table {
+    background-color: var(--color-box-bg);
+    width: 80%;
+    border-collapse: collapse;
+    position: relative;
+    left: 5%;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #0f0f0f;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color-navbar-bg);
+}
+
+tbody tr:hover {
+    background-color: var(--color-box-hover);
+}
