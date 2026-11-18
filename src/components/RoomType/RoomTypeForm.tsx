@@ -6,15 +6,18 @@ import { Button } from "../Button/Button"
 import { CheckBox } from "../Form/CheckBox"
 import { FormBox } from "../Form/FormBox"
 import { InputField } from "../Form/InputField"
+import { SelectDropdown } from "../Form/SelectDropdown"
+import { RoomStatusIds } from "../../constants/roomStatus"
 
 
 interface RoomTypeFormProps {
     label: string
     method: 'get' | 'post' | 'put' | 'patch' | 'delete'
     defaultValues?: {
-        name: string,
-        capacity: number,
-        price: number,
+        name: string
+        capacity: number
+        price: number
+        statusId: number
         facility: number[]
         description: string | null
     }
@@ -24,11 +27,11 @@ interface RoomTypeFormProps {
 
 export function RoomTypeForm({ method, label, defaultValues, errors }: RoomTypeFormProps) {
     const [isDisabled, setIsDisabled] = useState(true);
-    useEffect(()=>{
-        if(method === "post"){
+    useEffect(() => {
+        if (method === "post") {
             setIsDisabled(false)
         }
-    },[method])
+    }, [method])
     const handleDisabled = () => {
         setIsDisabled(!isDisabled);
     }
@@ -65,7 +68,17 @@ export function RoomTypeForm({ method, label, defaultValues, errors }: RoomTypeF
                     disabled={isDisabled}
                     required />
 
-                <CheckBox label="Facility" checkedIds={defaultValues?.facility} name="facilityIds" checkList={facilityIds} disabled={isDisabled}/>
+                <SelectDropdown
+                    key={`status-${defaultValues?.statusId}`}
+                    label="Status"
+                    name="status"
+                    defaultValue={defaultValues?.statusId}
+                    disabled={isDisabled}
+                    options={RoomStatusIds}>
+                </SelectDropdown>
+
+
+                <CheckBox label="Facility" checkedIds={defaultValues?.facility} name="facilityIds" checkList={facilityIds} disabled={isDisabled} />
                 <div>
                     <span style={{ fontWeight: "bold" }}>Description</span>
                     <br />
