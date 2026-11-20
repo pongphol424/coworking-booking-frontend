@@ -27,19 +27,23 @@ interface RoomTypeFormProps {
 
 export function RoomTypeForm({ method, label, defaultValues, errors }: RoomTypeFormProps) {
     const [isDisabled, setIsDisabled] = useState(true);
+    const [isStatusDisabled, setIsStatusDisabled] = useState(true)
     useEffect(() => {
         if (method === "post") {
             setIsDisabled(false)
+            setIsStatusDisabled(false)
         }
     }, [method])
     const handleDisabled = () => {
+        if (method !== "patch") {
+            setIsStatusDisabled(!isStatusDisabled)
+        }
         setIsDisabled(!isDisabled);
     }
 
     return (
         <>
             <FormBox label={label} method={method}>
-
                 <InputField
                     label="Room Type Name"
                     name="name"
@@ -50,33 +54,35 @@ export function RoomTypeForm({ method, label, defaultValues, errors }: RoomTypeF
                     disabled={isDisabled}
                     required />
 
-                <InputField
-                    label="Capacity"
-                    name="capacity"
-                    type="number"
-                    defaultValue={defaultValues?.capacity}
-                    error={errors?.capacity}
-                    disabled={isDisabled}
-                    required />
+                <div style={{ display: "flex" }}>
 
-                <InputField
-                    label="Price"
-                    name="price"
-                    type="number"
-                    defaultValue={defaultValues?.price}
-                    error={errors?.price}
-                    disabled={isDisabled}
-                    required />
+                    <InputField
+                        label="Capacity"
+                        name="capacity"
+                        type="number"
+                        defaultValue={defaultValues?.capacity}
+                        error={errors?.capacity}
+                        disabled={isDisabled}
+                        required />
 
-                <SelectDropdown
-                    key={`status-${defaultValues?.statusId}`}
-                    label="Status"
-                    name="status"
-                    defaultValue={defaultValues?.statusId}
-                    disabled={isDisabled}
-                    options={RoomStatusIds}>
-                </SelectDropdown>
+                    <InputField
+                        label="Price"
+                        name="price"
+                        type="number"
+                        defaultValue={defaultValues?.price}
+                        error={errors?.price}
+                        disabled={isDisabled}
+                        required />
 
+                    <SelectDropdown
+                        key={`status-${defaultValues?.statusId}`}
+                        label="Status"
+                        name="status"
+                        defaultValue={defaultValues?.statusId}
+                        disabled={isStatusDisabled}
+                        options={RoomStatusIds}>
+                    </SelectDropdown>
+                </div>
 
                 <CheckBox label="Facility" checkedIds={defaultValues?.facility} name="facilityIds" checkList={facilityIds} disabled={isDisabled} />
                 <div>
