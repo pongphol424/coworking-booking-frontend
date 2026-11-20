@@ -1,5 +1,5 @@
-import "./RoomTypeDetail.module.css"
-import { useActionData, useLoaderData, useSearchParams } from "react-router-dom"
+import styles from "./RoomTypeDetail.module.css"
+import { useActionData, useLoaderData, useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { RoomTypeForm } from "../../../components/RoomType/RoomTypeForm"
 import type { Roomtype } from "../../../constants/roomType"
 import { facilityIds } from "../../../constants/facilities"
@@ -52,6 +52,10 @@ export function RoomTypeDetail() {
     const actionData = useActionData();
     const [searchParams, setSearchParams] = useSearchParams();
 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from || '/admin/room-types'
+
     const [sortBy, setSortBy] = useState<string>(loaderData.sort.sortBy)
     const [orderBy, setOrderBy] = useState<string>(loaderData.sort.orderBy)
     const { roomTypeData, roomTypeHistory } = loaderData;
@@ -70,8 +74,6 @@ export function RoomTypeDetail() {
     });
 
 
-
-
     function handleSort(column: string) {
         const newSortBy = column;
         const newOrderBy = sortBy === column ?
@@ -84,9 +86,10 @@ export function RoomTypeDetail() {
         const params = new URLSearchParams(searchParams);
         params.set('sortBy', newSortBy);
         params.set('orderBy', newOrderBy);
-        
+
         setSearchParams(params);
-    }
+    };
+
 
     function changePage(nextPage: number) {
         const params = new URLSearchParams(searchParams);
@@ -95,7 +98,7 @@ export function RoomTypeDetail() {
         params.set("limit", String(pagination.limit));
 
         setSearchParams(params);
-    }
+    };
 
     const facilityNames = roomTypeData.facilities.map((facility) => facility.toLowerCase());
     const facilityChackedIds = facilityIds
@@ -107,6 +110,9 @@ export function RoomTypeDetail() {
     return (
         <>
             <div>
+                <div className={styles.box}>
+                    <Button buttonstyle="button" onClick={() => navigate(from)}>Back</Button>
+                </div>
 
                 <RoomTypeForm
                     label="Room Type Detail"
@@ -129,7 +135,9 @@ export function RoomTypeDetail() {
                                     {sortBy === "endDate" ? orderBy === 'desc' ? "End Date ▾" : "End Date ▴"
                                         : "End Date ─"}
                                 </th>
-                                <th>Status</th>
+                                <th onClick={() => handleSort("statusName")}>
+                                    {sortBy === "statusName" ? orderBy === 'desc' ? "Status ▾" : "Status ▴"
+                                        : "Status ─"}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -167,7 +175,7 @@ export function RoomTypeDetail() {
                         Previous
                     </Button>
 
-                    <div style={{ paddingTop: "15px" }}>
+                    <div style={{ color: "#f6f5f4", paddingTop: "15px" }}>
                         Page {pagination.page} of {pagination.totalPages}
                     </div>
 
