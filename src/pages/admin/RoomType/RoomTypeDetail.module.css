@@ -2,6 +2,12 @@
     display: flex;
 }
 
+
+.box{
+    padding-left: 5%;
+    padding-bottom: 10px;
+}
+
 table {
     background-color: var(--color-box-bg);
     width: 80%;
@@ -20,6 +26,7 @@ td {
 
 th {
     background-color: var(--color-navbar-bg);
+    cursor: pointer;
 }
 
 tbody tr:hover {
