@@ -11,5 +11,7 @@ export const CreateRoomTypeSchema = z.object({
     description: z.string().max(65535, "Description is too long").optional()
 })
 
+export const UpdateRoomTypeSchema = CreateRoomTypeSchema.partial()
 
 export type RoomTypeCreateDto = z.infer<typeof CreateRoomTypeSchema>
+export type UpdateRoomTypeDto = z.infer<typeof UpdateRoomTypeSchema>
