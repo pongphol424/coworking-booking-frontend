@@ -5,13 +5,16 @@ import { Box } from "../Box/Box";
 interface RoomTypeListProps {
     roomTypes: Roomtype[]
     to?: string
+    state?: {
+        from: string
+    }
 }
 
-export function RoomTypeList({ roomTypes, to }: RoomTypeListProps) {
+export function RoomTypeList({ roomTypes, to, state }: RoomTypeListProps) {
     if (to) {
         return <>
             {roomTypes && roomTypes.map((roomType) => (
-                <Box to={`${to}/${roomType.id}`} key={roomType.id}>
+                <Box to={`${to}/${roomType.id}`} state = {state} key={roomType.id}>
                     <div>RoomType: {roomType.name}</div>
                     <div>Description: {roomType.description}</div>
                     <div>Capacity: {roomType.capacity}</div>
