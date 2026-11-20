@@ -32,3 +32,8 @@
     font-weight: bold;
     color: var(--color-text-error);
 }
+
+
+.select:disabled {
+    background-color: var(--color-input-field-disable);
+}
