@@ -10,7 +10,7 @@
 .select {
     background-color: var(--color-input-field);
     color: var(--color-text-input);
-    border: 0.5px solid var(--color-input-field-border);
+    border: 0px;
 
     border-radius: var(--radius-pill);
     font-size: var(--font-size-base);
